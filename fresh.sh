@@ -2,6 +2,8 @@
 
 echo "Setting up your Mac..."
 
+export DOTFILES='/Users/sel0001d/.dotfiles'
+
 # Check for Oh My Zsh and install if we don't have it
 if test ! $(which omz); then
   /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
@@ -22,37 +24,27 @@ ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
 # Update Homebrew recipes
 brew update
 
+brew install --build-from-source mono
 # Install all our dependencies with bundle (See Brewfile)
 brew tap homebrew/bundle
 brew bundle --file $DOTFILES/Brewfile
 
-# Set default MySQL root password and auth type
-mysql -u root -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'password'; FLUSH PRIVILEGES;"
-
-# Install PHP extensions with PECL
-pecl install imagick redis swoole
-
-# Install global Composer packages
-/usr/local/bin/composer global require laravel/installer laravel/valet beyondcode/expose spatie/global-ray spatie/visit
-
-# Install Laravel Valet
-$HOME/.composer/vendor/bin/valet install
-
-# Install Global Ray
-$HOME/.composer/vendor/bin/global-ray install
-
 # Create a Sites directory
-mkdir $HOME/Sites
+mkdir -p $HOME/Development
 
 # Create sites subdirectories
-mkdir $HOME/Sites/blade-ui-kit
-mkdir $HOME/Sites/laravel
+mkdir -p $HOME/Development/private
+mkdir -p $HOME/Development/glomex
 
 # Clone Github repositories
 $DOTFILES/clone.sh
 
 # Symlink the Mackup config file to the home directory
 ln -s $DOTFILES/.mackup.cfg $HOME/.mackup.cfg
+
+sudo ln -s /usr/bin/python3 /usr/bin/python
+dockutil --no-restart --add '/Applications/Safari.app'
+dockutil --no-restart --add '/Applications/Fantastical.app'
 
 # Set macOS preferences - we will run this last because this will reload the shell
 source $DOTFILES/.macos
