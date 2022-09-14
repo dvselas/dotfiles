@@ -20,7 +20,6 @@ brew 'pkg-config' # https://github.com/driesvints/dotfiles/issues/20
 brew 'teleport'
 brew 'fastlane'
 brew 'cocoapods'
-brew 'dockutil'
 
 # Development
 brew 'php'

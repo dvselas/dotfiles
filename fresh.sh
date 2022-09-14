@@ -5,7 +5,7 @@ echo "Setting up your Mac..."
 export DOTFILES='/Users/sel0001d/.dotfiles'
 
 # Check for Oh My Zsh and install if we don't have it
-if test ! $(which omz); then
+if [ ! -d "$HOME/.oh-my-zsh" ] ; then
   /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/HEAD/tools/install.sh)"
 fi
 
@@ -24,7 +24,6 @@ ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
 # Update Homebrew recipes
 brew update
 
-brew install --build-from-source mono
 # Install all our dependencies with bundle (See Brewfile)
 brew tap homebrew/bundle
 brew bundle --file $DOTFILES/Brewfile
@@ -40,11 +39,10 @@ mkdir -p $HOME/Development/glomex
 $DOTFILES/clone.sh
 
 # Symlink the Mackup config file to the home directory
-ln -s $DOTFILES/.mackup.cfg $HOME/.mackup.cfg
-
-sudo ln -s /usr/bin/python3 /usr/bin/python
-dockutil --no-restart --add '/Applications/Safari.app'
-dockutil --no-restart --add '/Applications/Fantastical.app'
+ln -sf $DOTFILES/.mackup.cfg $HOME/.mackup.cfg
 
 # Set macOS preferences - we will run this last because this will reload the shell
-source $DOTFILES/.macos
+#source $DOTFILES/.macos
+
+# Dock icons
+#$HOME/Development/private/dock.sh/dock.sh
