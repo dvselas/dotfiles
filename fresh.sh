@@ -41,6 +41,13 @@ $DOTFILES/clone.sh
 # Symlink the Mackup config file to the home directory
 ln -sf $DOTFILES/.mackup.cfg $HOME/.mackup.cfg
 
+curl -sSL https://get.rvm.io | bash -s stable
+curl -O https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer
+rvm-installer.asc && bash rvm-installer stable
+[[ -s '$HOME/.rvm/scripts/rvm' ]] && source '$HOME/.rvm/scripts/rvm'
+rvm install 3.1.2
+rvm use 3.1.2
+
 # Set macOS preferences - we will run this last because this will reload the shell
 #source $DOTFILES/.macos
 
