@@ -1,8 +1,8 @@
 [submodule "plugins/zsh-autosuggestions"]
 	path = plugins/zsh-autosuggestions
-	url = git@github.com:zsh-users/zsh-autosuggestions.git
+	url = ssh://git@github.com:zsh-users/zsh-autosuggestions.git
 
 [submodule "themes/powerlevel10k"]
 	path = themes/powerlevel10k
-	url = git@github.com:romkatv/powerlevel10k.git
+	url = ssh://git@github.com:romkatv/powerlevel10k.git
 
